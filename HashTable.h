@@ -41,6 +41,7 @@ private:
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 HashTable(int initTableSize){
 
 }
@@ -54,6 +55,7 @@ HashTable(int initTableSize){
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 HashTable(const HashTable& other){
 	
 }
@@ -67,6 +69,7 @@ HashTable(const HashTable& other){
 // Authors:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 HashTable operator=(const HashTable& other){
 
 }
@@ -78,6 +81,7 @@ HashTable operator=(const HashTable& other){
 // Authors:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 ~HashTable(){
 
 }
@@ -90,6 +94,7 @@ HashTable operator=(const HashTable& other){
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 void insert(const DataType& searchKey, DataType& returnItem) const{
 
 }
@@ -101,6 +106,7 @@ void insert(const DataType& searchKey, DataType& returnItem) const{
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 bool retrieve(const KeyType& searchKey, DataType& returnItem) const{
 
 }
@@ -113,6 +119,7 @@ bool retrieve(const KeyType& searchKey, DataType& returnItem) const{
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 bool remove(const KeyType& key){
 
 }
@@ -123,6 +130,7 @@ bool remove(const KeyType& key){
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 void clear(){
 
 }
@@ -133,6 +141,7 @@ void clear(){
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 bool isEmpty() const{
 
 }
@@ -147,6 +156,7 @@ bool isEmpty() const{
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 void showStructure() const{
 
 }
@@ -161,6 +171,7 @@ void showStructure() const{
 // Author:
 // Inputs:
 // Outputs:
+template <typename DataType, typename KeyType>
 void copyTable(const HashTable& source){
 
 }
