@@ -10,11 +10,12 @@
 using namespace std;
 
 template <typename DataType, typename KeyType>
-class HashTable {
+class HashTable 
+{
 public:
     HashTable(int initTableSize);
     HashTable(const HashTable& other);
-    HashTable& operator=(const HashTable& other);
+    HashTable<DataType, KeyType>& operator=(const HashTable<DataType, KeyType>& other);
 
     ~HashTable();
 
@@ -42,8 +43,9 @@ private:
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-HashTable(int initTableSize){
-
+HashTable<DataType, KeyType>::HashTable(int initTableSize){
+	tableSize = initTableSize;
+	dataTable = new LinkedList<DataType, KeyType>[tableSize];
 }
 
 // Pseudocode:
@@ -56,7 +58,7 @@ HashTable(int initTableSize){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-HashTable(const HashTable& other){
+HashTable<DataType, KeyType>::HashTable(const HashTable& other){
 	
 }
 
@@ -70,7 +72,7 @@ HashTable(const HashTable& other){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-HashTable operator=(const HashTable& other){
+HashTable<DataType, KeyType> operator=(const HashTable& other){
 
 }
 
@@ -82,9 +84,10 @@ HashTable operator=(const HashTable& other){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-~HashTable(){
-
+HashTable<DataType, KeyType>::~HashTable(){
+	clear();
 }
+
 
 // Pseudocode:
 // Inserts the key-value pair into the hash table. 
@@ -95,7 +98,7 @@ template <typename DataType, typename KeyType>
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-void insert(const DataType& searchKey, DataType& returnItem) const{
+void HashTable<DataType, KeyType>::insert(const DataType& searchKey, DataType& returnItem) const{
 
 }
 
@@ -107,7 +110,8 @@ void insert(const DataType& searchKey, DataType& returnItem) const{
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-bool retrieve(const KeyType& searchKey, DataType& returnItem) const{
+
+bool HashTable<DataType, KeyType>::retrieve(const KeyType& searchKey, DataType& returnItem) const{
 
 }
 
@@ -120,7 +124,7 @@ bool retrieve(const KeyType& searchKey, DataType& returnItem) const{
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-bool remove(const KeyType& key){
+bool HashTable<DataType, KeyType>::remove(const KeyType& key){
 
 }
 
@@ -131,7 +135,7 @@ bool remove(const KeyType& key){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-void clear(){
+void HashTable<DataType, KeyType>::clear(){
 
 }
 
@@ -142,7 +146,7 @@ void clear(){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-bool isEmpty() const{
+bool HashTable<DataType, KeyType>::isEmpty() const{
 
 }
 
@@ -157,7 +161,7 @@ bool isEmpty() const{
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-void showStructure() const{
+void HashTable<DataType, KeyType>::showStructure() const{
 
 }
 
@@ -172,7 +176,7 @@ void showStructure() const{
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-void copyTable(const HashTable& source){
+void HashTable<DataType, KeyType>::copyTable(const HashTable& source){
 
 }
 
