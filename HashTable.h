@@ -72,7 +72,7 @@ HashTable<DataType, KeyType>::HashTable(const HashTable<DataType, KeyType>& othe
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-HashTable<DataType, KeyType> operator=(const HashTable& other){
+HashTable<DataType, KeyType> operator=(const HashTable<DataType, KeyType>& other){
 
 }
 
@@ -98,7 +98,8 @@ HashTable<DataType, KeyType>::~HashTable(){
 // Inputs:
 // Outputs:
 template <typename DataType, typename KeyType>
-void HashTable<DataType, KeyType>::insert(const DataType& searchKey, DataType& returnItem){
+void HashTable<DataType, KeyType>::insert(const DataType& searchKey, const KeyType& returnItem)
+{
 
 }
 
