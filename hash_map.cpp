@@ -58,7 +58,7 @@ int main() {
 	cout << endl;
 
 	// Create a collision
-	cout << "Creating a collision..." << endl;
+	cout << "Creating a collision in Ranch Dressing..." << endl;
 	hashMap["Ranch Dressing"] = 10000;
 
 	cout << "Printing keys and values after collision..." << endl;
