@@ -54,10 +54,20 @@ int main() {
 	cout << "Key: 			Value:" << endl;
 	for(itr = hashMap.begin(); itr != hashMap.end(); itr++){
 		cout << itr->first << "		" << itr->second << endl;
+	}	
+	cout << endl;
+
+	// Create a collision
+	cout << "Creating a collision..." << endl;
+	hashMap["Ranch Dressing"] = 10000;
+
+	cout << "Printing keys and values after collision..." << endl;
+	cout << "Key:			Value:" << endl;
+	for(itr = hashMap.begin(); itr != hashMap.end(); itr++){
+		cout << itr->first << "		" << itr->second << endl;
 	}
-
-	
-
+	cout << "Notice how when the Ranch Dressing key collided, it overrided the new value." << endl;
+	cout << "This is because the keys MUST be unique. No two elements can have equivalent keys." << endl;
 
 }
 
