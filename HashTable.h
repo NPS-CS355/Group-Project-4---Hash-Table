@@ -2,7 +2,6 @@
 
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
-
 #include "LinkedList.h"
 #include <stdexcept>
 #include <iostream>
@@ -39,11 +38,12 @@ private:
 // Constructor - Creates the empty has table. 
 // (Remember you are using a linkedlist)
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: Table Size
+// Outputs: No output, just initializes variables and makes enough space in memory for all the variables. 
 template <typename DataType, typename KeyType>
-HashTable<DataType, KeyType>::HashTable(int initTableSize){
+HashTable<DataType, KeyType>::HashTable(int initTableSize)
+{
 	tableSize = initTableSize;
 	dataTable = new LinkedList<DataType, KeyType>[tableSize];
 }
@@ -54,11 +54,14 @@ HashTable<DataType, KeyType>::HashTable(int initTableSize){
 // parameter other. Use the copyTable helper
 // method to do this.
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: A hash table to copy the values from
+// Outputs: None
 template <typename DataType, typename KeyType>
-HashTable<DataType, KeyType>::HashTable(const HashTable<DataType, KeyType>& other){
+HashTable<DataType, KeyType>::HashTable(const HashTable<DataType, KeyType>& other)
+{
+	tableSize = other.tableSize;
+	copyTable(other);
 	
 }
 
@@ -68,24 +71,28 @@ HashTable<DataType, KeyType>::HashTable(const HashTable<DataType, KeyType>& othe
 // other HashTable object parameter and returns
 // a reference to this object
 
-// Authors:
-// Inputs:
-// Outputs:
+// Authors: Sarah
+// Inputs: A templated HashTable 
+// Outputs: Returns a HashTable with the values from the passed table copied into it. 
 template <typename DataType, typename KeyType>
-HashTable<DataType, KeyType> operator=(const HashTable<DataType, KeyType>& other){
-
+HashTable<DataType, KeyType>& HashTable<DataType, KeyType>::operator=(const HashTable<DataType, KeyType>& other){
+	clear();
+	tableSize = other.tableSize;
+	copyTable(other);
 }
 
 // Pseudocode:
 // Destructor - Deallocates the memory used
 // to store a hash table.
 
-// Authors:
-// Inputs:
-// Outputs:
+// Authors: Sarah
+// Inputs: None
+// Outputs: None
 template <typename DataType, typename KeyType>
-HashTable<DataType, KeyType>::~HashTable(){
+HashTable<DataType, KeyType>::~HashTable()
+{
 	clear();
+	delete[] dataTable;
 }
 
 
@@ -94,26 +101,30 @@ HashTable<DataType, KeyType>::~HashTable(){
 // Remember that your hash table entries
 // are each a linked list.
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: A dataItem and a key
+// Outputs: None
 template <typename DataType, typename KeyType>
-void HashTable<DataType, KeyType>::insert(const DataType& searchKey, const KeyType& returnItem)
+void HashTable<DataType, KeyType>::insert(const DataType& newDataItem, const KeyType& key)
 {
-
+  unsigned int index = newDataItem.hash(key) % tableSize;
+  cout << "Index is " << index << endl;
+  dataTable[index].insert(newDataItem, key);
 }
 
 // Pseudocode:
 // Searches the hash table for the data item with 
 // the matching key.
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Sarah
+// Inputs: A key and DataItem
+// Outputs: Returns if the Value is found using the given key or not  
 template <typename DataType, typename KeyType>
-
-bool HashTable<DataType, KeyType>::retrieve(const KeyType& searchKey, DataType& returnItem) const{
-
+bool HashTable<DataType, KeyType>::retrieve(const KeyType& searchKey, DataType& returnItem) const
+{
+  int index = returnItem.hash(searchKey) % tableSize;
+  return dataTable[index].retrieve(searchKey, returnItem);
+  
 }
 
 // Pseudocode:
@@ -121,34 +132,52 @@ bool HashTable<DataType, KeyType>::retrieve(const KeyType& searchKey, DataType& 
 // deleteKey. If the data item is found, then removes the data
 // and returns true. Otherwise, returns false.
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: A key to remove
+// Outputs: Returns true if values was removed and false otherwise 
 template <typename DataType, typename KeyType>
-bool HashTable<DataType, KeyType>::remove(const KeyType& key){
-
+bool HashTable<DataType, KeyType>::remove(const KeyType& key)
+{
+  for(int i = 0; i < tableSize; i++)
+  {
+    if(dataTable[i].remove(key))
+      return true;
+  }
+  return false;
 }
 
 // Pseudocode:
 // Removes all data items in the hash table
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Sarah
+// Inputs: None
+// Outputs: None just clears the enitre hashtable
 template <typename DataType, typename KeyType>
-void HashTable<DataType, KeyType>::clear(){
-
+void HashTable<DataType, KeyType>::clear()
+{
+  for(int i = 0; i < tableSize; i++)
+     {
+       dataTable[i].clear();
+     }
+  tableSize = 0;
 }
 
 // Pseudocode:
 // Returns true if the hash table is empty, otherwise return false
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: None
+// Outputs: Returns true if the hashTable is empty and false otherwise
 template <typename DataType, typename KeyType>
-bool HashTable<DataType, KeyType>::isEmpty() const{
-
+bool HashTable<DataType, KeyType>::isEmpty() const
+{
+ 
+  for(int i = 0; i < tableSize; i++)
+    {
+      if(!dataTable[i].isEmpty())
+        return false;
+    }
+  return true;
 }
 
 // Psuedocode:
@@ -158,11 +187,23 @@ bool HashTable<DataType, KeyType>::isEmpty() const{
 // Bucket 0: ["key", "value"]
 // Hint: The linkedList implementation has things that can help
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Sarah
+// Inputs: None
+// Outputs: Just prints the Key value pairs of the hashTable sequentially IF the table is not empty
 template <typename DataType, typename KeyType>
 void HashTable<DataType, KeyType>::showStructure() const{
+  
+  if(isEmpty())
+      cout << "HashTable is Empty!" << endl;
+  else 
+  {
+      for (int i = 0; i < tableSize; i++) 
+      {
+          cout << "Bucket " << i << ": ";
+          dataTable[i].showStructure();
+          cout << endl;
+      }
+  }
 
 }
 
@@ -173,12 +214,17 @@ void HashTable<DataType, KeyType>::showStructure() const{
 // Bucket 0: ["key", "value"]
 // Hint: The linkedList implementation has things that can help
 
-// Author:
-// Inputs:
-// Outputs:
+// Author: Paul
+// Inputs: A hashTable to copy the values from 
+// Outputs: None just copies the values from the input and stores it into our table. 
 template <typename DataType, typename KeyType>
 void HashTable<DataType, KeyType>::copyTable(const HashTable& source){
 
+	for(int i = 0; i < tableSize; i++)
+	{
+		dataTable[i] = source.dataTable[i];
+	}
 }
 
 #endif // ifndef HASHTABLE_H
+
