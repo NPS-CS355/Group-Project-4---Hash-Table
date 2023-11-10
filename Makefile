@@ -2,7 +2,7 @@ CXX = c++
 
 EXECUTABLE = driver
 
-OBJS = hash_lab.o hash_map.o
+OBJS = hash_lab.o 
 
 .PHONY: all clean
 
